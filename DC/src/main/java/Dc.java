@@ -8,13 +8,11 @@ import java.util.List;
 public class Dc {
     public static void main(String[] args) {
 
-        // Assurez-vous de gérer les exceptions appropriées ici
         try {
-            // Remplacez par votre chemin de projet réel
             String pathTest = "/Users/ozer/Documents/GitHub/TP2-IFT3913/DC/src/test/java/jfreechart-master/src/test/java/org/jfree";
             Dc counter = new Dc();
-            double totalDc = counter.dcPourDossier(pathTest);
-            System.out.println(totalDc);
+            double moyenneDc = counter.dcMoyennePourDossier(pathTest);
+            System.out.println("La moyenne dc pour le dossier test est de: "+moyenneDc);
 
 
         } catch (IOException e) {
@@ -92,12 +90,10 @@ public class Dc {
         return javaFiles;
     }
 
-    public double dcPourDossier(String projectPath) throws IOException {
+    public double dcMoyennePourDossier(String projectPath) throws IOException {
         File projectDirectory = new File(projectPath);
         List<File> allJavaFiles = getAllJavaFiles(projectDirectory);
         int sizeFiles = allJavaFiles.size();
-        System.out.println(sizeFiles);
-
         if (allJavaFiles.isEmpty()) {
             System.out.println("Aucun fichier Java trouvé dans le projet.");
             return 0;
