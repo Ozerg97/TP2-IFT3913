@@ -2,10 +2,8 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-//import org.eclipse.jgit.transport.URIish;
 
 import java.io.IOException;
-//import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class NCH{
