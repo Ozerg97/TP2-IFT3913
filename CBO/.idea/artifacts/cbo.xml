@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cbo">
+    <output-path>$PROJECT_DIR$/out/artifacts/cbo</output-path>
+    <root id="archive" name="CBO.jar">
+      <element id="module-output" name="CBO" />
+    </root>
+  </artifact>
+</component>

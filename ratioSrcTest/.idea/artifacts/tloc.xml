@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="tloc">
-    <output-path>$PROJECT_DIR$/out/artifacts/tloc</output-path>
-    <root id="archive" name="tloc.jar">
-      <element id="module-output" name="ratioTest" />
-    </root>
-  </artifact>
-</component>

@@ -14,7 +14,8 @@ public class Cbo {
 
     public static void main(String[] args) {
         // Spécifiez le répertoire racine contenant les fichiers .java
-        File rootDir = new File("/Users/ozer/Documents/GitHub/TP2-IFT3913/CBO/src/test/java/jfreechart-master/src/main");
+
+        File rootDir = new File("jfreechart-master/src/main/java/org/jfree");
         processDirectory(rootDir);
 
         // Calculer le CBO moyen en divisant le CBO total par le nombre de fichiers Java

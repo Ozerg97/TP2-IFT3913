@@ -1,30 +1,29 @@
-package ratio;
+package dc;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RatioCodeTest {
+public class Dc {
     public static void main(String[] args) {
         try {
-            String pathCode = "jfreechart-master/src/main";
-            String pathTest = "jfreechart-master/src/test/java/org/jfree";
-            RatioCodeTest counter = new RatioCodeTest();
-            int tailleCode = counter.tlocPourDossier(pathCode);
-            int tailleTest = counter.tlocPourDossier(pathTest);
-            double ratio = (double) tailleCode /tailleTest;
-            System.out.println("Le Tloc du code est de: "+tailleCode);
-            System.out.println("Le Tloc du test est de: "+tailleTest);
-            System.out.println("Le ratio code/test est de: "+ratio+ ". Donc pour "+ ratio+ " lignes de code, il y a une ligne de test" );
+            String pathTest = "jfreechart-master/src/test";
+            Dc counter = new Dc();
+            double moyenneDc = counter.dcMoyennePourDossier(pathTest);
+            System.out.println("La moyenne dc pour le dossier test est de: "+moyenneDc);
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public int tloc(String filePath) throws IOException {
+    public double dc(String filePath) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        int tloc = 0;
+        int loc = 0;
+        int cloc = 0;
 
         try {
             String ligne;
@@ -32,31 +31,46 @@ public class RatioCodeTest {
 
             while ((ligne = reader.readLine()) != null) {
                 ligne = ligne.trim();
-
-
+                if (!ligne.isEmpty() && !ligne.contains("//") && !ligne.contains("*") && !ligne.contains("/*")) { // Si ma ligne est pas vide et ne contient pas un commentaire //
+                    loc++;
+                    continue;
+                }
+                if (ligne.startsWith("*")){
+                    cloc++;
+                    loc++;
+                    continue;
+                }
                 if (ligne.startsWith("/*") && !ligne.endsWith("*/") && !ligne.contains("*/")) {
                     dansCommentaire = true;
+                    cloc++;
+                    loc++;
                     continue;
                 }
 
                 if (dansCommentaire) { // si je suis dans un commentaire /* */ verifie si je termine
-                    if (ligne.endsWith("*/")) {
+                    if (ligne.endsWith("*/") ) {
                         dansCommentaire = false;
+                        loc++;
+                        cloc++;
+                        continue;
                     }
-                    continue;
+
                 }
-                if (ligne.contains("/*") && ligne.contains("*/") && !ligne.endsWith("*/")){ // si j'ai un commentaire /* */ mais aussi du code il faut compter la ligne de code
-                    tloc++;
+                if (ligne.contains("/*") && ligne.contains("*/") && !ligne.endsWith("*/")){ // si j'ai un commentaire /* */ mais aussi du code, il faut compter la ligne de code
+                    cloc++;
+                    loc++;
                 }
 
-                if (!ligne.isEmpty() && !ligne.startsWith("//")) { // Si ma ligne est pas vide et contient un commentaire //
-                    tloc++;
-                }
+
             }
         } finally {
             reader.close();
         }
-        return tloc;
+        File myfile = new File(filePath);
+
+        double dc = (double) cloc /loc;
+        System.out.println("Le DC de "+myfile.getName()+" "+ dc );
+        return dc;
     }
 
     public List<File> getAllJavaFiles(File folder) {
@@ -77,23 +91,24 @@ public class RatioCodeTest {
         return javaFiles;
     }
 
-
-    public int tlocPourDossier(String projectPath) throws IOException {
+    public double dcMoyennePourDossier(String projectPath) throws IOException {
         File projectDirectory = new File(projectPath);
         List<File> allJavaFiles = getAllJavaFiles(projectDirectory);
-
+        int sizeFiles = allJavaFiles.size();
         if (allJavaFiles.isEmpty()) {
             System.out.println("Aucun fichier Java trouvé dans le projet.");
             return 0;
         }
 
-        int totalTloc = 0;
+        double totalDc = 0;
         for (File javaFile : allJavaFiles) {
-            int fileTloc = tloc(javaFile.getPath());
-            totalTloc += fileTloc;
+            double fileDc = dc(javaFile.getPath());
+            totalDc += fileDc;
         }
 
-        return totalTloc;
+        return totalDc/sizeFiles;
     }
+
+
 
 }
