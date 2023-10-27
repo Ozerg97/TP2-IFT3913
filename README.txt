@@ -1,4 +1,4 @@
-Fait par : Ozer Guney ( ) et Paul Konan(20175655)
+Fait par : Ozer Guney (20193803) et Paul Konan(20175655)
 
 Lien GitHub: https://github.com/Ozerg97/TP2-IFT3913
 
