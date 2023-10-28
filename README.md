@@ -33,5 +33,6 @@ Documentation:
                 className :  "tropCom.java"
 
         Pour metrique Ratio tloc code/tloc test, Cbo et Dc:
-          Des fichiers jar ont été creer et placer dans le fichier zip. Il faut seulement executer sur le terminal les fichiers jar sans mettre d'arguments comme ceci: java -jar <jarfilename.jar>. J'ai mis les dossiers necessaires avec les fichiers jar pour faire les   
+          Des fichiers jar ont été creer et placer dans le fichier zip. Il faut seulement executer sur le terminal les fichiers jar sans mettre d'arguments comme ceci: java -jar <jarfilename.jar>. Si vous êtes sur Windows, cliquez deux fois sur le fichier run.bat pour 
+          executer directement.  J'ai mis les dossiers necessaires avec les fichiers jar pour faire les   
           tests.
